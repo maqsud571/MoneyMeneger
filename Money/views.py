@@ -26,3 +26,22 @@ class AddMoneyView(APIView):
         else:
             return Response(serializer.errors)
 
+class FilterMoney(APIView):
+    serializer_class = ChiqimSerializer
+    queryset = AllMoney.objects.all()
+
+    def post(self, request):
+        user_n = request.data.get("user_n")
+        type_of_money = request.data.get("type_of_money")
+        chiqim = AllMoney.objects.all().filter(user_n=user_n, type_of_money=type_of_money)
+        money = 0
+        money_all = 0
+
+        for i in chiqim:
+            money += i.total_money
+
+        serializer = AllMoneySerializer(chiqim, many=True)
+        return Response({"Data": serializer.data,
+                         f"Barcha {type_of_money} lar": money,
+
+                         })
