@@ -97,5 +97,5 @@ class Top3User(APIView):
             sorted(asosiy_hisob_kitob.items(), key=lambda item: item[1], reverse=True))
 
         top3_users = dict(list(sorted_asosiy_hisob_kitob.items())[:3])
-
+        #
         return Response(top3_users)
