@@ -1,6 +1,8 @@
 from django.db import models
 
 
+# Create your models here.
+
 class User(models.Model):
     user_name = models.CharField(max_length=20, unique=True)
     user_password = models.CharField(max_length=16)
@@ -8,7 +10,7 @@ class User(models.Model):
     def __str__(self):
         return self.user_name
 
-
+#
 class AllMoney(models.Model):
     user_n = models.ForeignKey(User, on_delete=models.CASCADE)
     total_money = models.IntegerField(default=0)
@@ -31,4 +33,3 @@ class AllMoney(models.Model):
     )
     category_money = models.CharField(max_length=30, choices=CHOISE2)
     comment = models.TextField(blank=True)
-

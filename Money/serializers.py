@@ -1,6 +1,9 @@
 from rest_framework.serializers import ModelSerializer
 from .models import User, AllMoney
 
+
+
+
 class RegisterSerializer(ModelSerializer):
     class Meta:
         model = User

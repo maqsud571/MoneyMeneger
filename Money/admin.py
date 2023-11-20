@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import *
+from .models import AllMoney,User
+# Register your models here.
 
-admin.site.register(User)
 admin.site.register(AllMoney)
+admin.site.register(User)
