@@ -3,11 +3,13 @@ from .serializers import RegisterSerializer, AllMoneySerializer, User, AllMoney,
 # Create your views here.
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from drf_yasg.utils import swagger_auto_schema
 
 
 class UserRegisterView(APIView):
     serializer_class = RegisterSerializer
     queryset = User.objects.all()
+    @swagger_auto_schema(request_body=RegisterSerializer)
 
     def post(self, request):
         username = request.data.get('user_name')
@@ -20,7 +22,7 @@ class UserRegisterView(APIView):
 class AddMoneyView(APIView):
     serializer_class = AllMoneySerializer
     queryset = AllMoney.objects.all()
-
+    @swagger_auto_schema(request_body=AllMoneySerializer)
     def post(self, request):
         serializer = AllMoneySerializer(data=request.data)
         if serializer.is_valid():
@@ -33,7 +35,7 @@ class AddMoneyView(APIView):
 class FilterMoney(APIView):
     serializer_class = ChiqimSerializer
     queryset = AllMoney.objects.all()
-
+    @swagger_auto_schema(request_body=ChiqimSerializer)
     def post(self, request):
         user_n = request.data.get("user_n")
         type_of_money = request.data.get("type_of_money")
@@ -65,7 +67,7 @@ class Top3User(APIView):
         dict_chiqim = {
 
         }
-
+        #
         for k in users_list:
             pul_odam = 0
             pul = AllMoney.objects.all().filter(user_n_id=k, type_of_money="Kirim")
